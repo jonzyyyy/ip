@@ -10,6 +10,7 @@ public class Yapper {
         printIntroduction();
         while(true) {
             String request = scanner.nextLine().trim();
+            printHorizontalLine();
             if (request.equals("bye")) {
                 break;
             } else if (request.equals("list")) {
@@ -33,9 +34,11 @@ public class Yapper {
                 Task newTask = new Event(request);
                 addTask(newTask);
             }
+            printHorizontalLine();
         }
         printExit();
         scanner.close();
+        printHorizontalLine();
     }
 
     private static void printIntroduction() {
@@ -47,44 +50,39 @@ public class Yapper {
 
     private static void printHorizontalLine() {
         int length = 50;
-        String horizontalLine = "_".repeat(length);
+        String horizontalLine = "-".repeat(length);
         System.out.println("\t" + horizontalLine);
     }
 
     private static void printExit() {
-        printHorizontalLine();
         System.out.println("\tBye. Hope to see you again soon!");
-        printHorizontalLine();
     }
 
     private static void printList() {
-        printHorizontalLine();
         System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             System.out.println("\t" + (i + 1) + "." + list.get(i));
         }
-        printHorizontalLine();
     }
 
     private static void markItem(int index) {
-        System.out.println("\t" + "Nice! I've marked this task as done:");
         Task task = list.get(index);
         task.setCompleted();
-        System.out.println("\t\t[X] " + task);
+        System.out.println("\t" + "Nice! I've marked this task as done:");
+        System.out.println("\t\t" + task);
     }
 
     private static void unmarkItem(int index) {
-        System.out.println("\t" + "OK, I've marked this task as not done yet:");
         Task task = list.get(index);
         task.setNotCompleted();
-        System.out.println("\t\t[ ] " + task);
+        System.out.println("\t" + "OK, I've marked this task as not done yet:");
+        System.out.println("\t\t" + task);
     }
 
+
     private static void addTask(Task newTask) {
-        printHorizontalLine();
         list.add(newTask);
         System.out.println("\tGot it. I've added this task:\n" + "\t\t" + newTask);
         System.out.println("\tNow you have " + list.size() + " tasks in the list.");
-        printHorizontalLine();
     }
 }
