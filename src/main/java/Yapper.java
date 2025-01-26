@@ -1,7 +1,8 @@
 package main.java;
 
+import main.java.categories.*;
+import main.java.exceptions.*;
 import java.util.Scanner;
-import main.java.Exceptions.*;
 import java.util.ArrayList;
 
 public class Yapper {

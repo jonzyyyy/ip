@@ -1,7 +1,7 @@
 /**
  * This class is the superclass the models all Tasks within Yapper
  */
-package main.java;
+package main.java.categories;
 
 public abstract class Task {
 

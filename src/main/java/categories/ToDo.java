@@ -1,5 +1,5 @@
-package main.java;
-import main.java.Exceptions.MissingTaskArgs;
+package main.java.categories;
+import main.java.exceptions.MissingTaskArgs;
 import java.util.Arrays;
 
 public class ToDo extends Task {

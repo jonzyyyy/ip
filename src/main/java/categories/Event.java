@@ -1,6 +1,6 @@
-package main.java;
+package main.java.categories;
 
-import main.java.Exceptions.MissingTaskArgs;
+import main.java.exceptions.MissingTaskArgs;
 
 public class Event extends Task {
 
