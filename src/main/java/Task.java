@@ -1,11 +1,13 @@
+/**
+ * This class is the superclass the models all Tasks within Yapper
+ */
+package main.java;
+
 public abstract class Task {
 
     private boolean completed = false;
-    private String taskName;
-
-    public Task(String taskName) {
-        this.taskName = taskName;
-    }
+    protected String taskName;
+    protected String request;
 
     @Override
     public String toString() {
@@ -22,5 +24,4 @@ public abstract class Task {
     public void setNotCompleted() {
         completed = false;
     }
-
 }

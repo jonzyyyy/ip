@@ -1,13 +1,22 @@
+package main.java;
+
+import main.java.Exceptions.MissingTaskArgs;
+
 public class Event extends Task {
 
      private String fromDatetime;
      private String toDatetime;
 
      public Event(String request) {
-         super(request.split("event | /from | /to ")[1].trim());
-         String[] splitString = request.split("/from |/to ");
-         this.fromDatetime = splitString[1].trim();
-         this.toDatetime = splitString[2].trim();
+         String[] splitString = request.split("event | /from | /to ");
+
+         if (splitString.length < 3) {
+            throw new MissingTaskArgs("\tHey! I dont quite understand you. Remember for Events " +
+                    "Give it in this format: command name /from date /to date");
+         }
+         this.taskName = splitString[1].trim();
+         this.fromDatetime = splitString[2].trim();
+         this.toDatetime = splitString[3].trim();
      }
 
      @Override

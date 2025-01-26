@@ -1,4 +1,7 @@
+package main.java;
+
 import java.util.Scanner;
+import main.java.Exceptions.*;
 import java.util.ArrayList;
 
 public class Yapper {
@@ -10,29 +13,39 @@ public class Yapper {
         printIntroduction();
         while(true) {
             String request = scanner.nextLine().trim();
+            String[] splitRequest = request.split(" ");
+            String command = splitRequest[0];
             printHorizontalLine();
-            if (request.equals("bye")) {
-                break;
-            } else if (request.equals("list")) {
-                printList();
-            } else if (request.startsWith("mark") && request.length() == 6) {
-                // Checks for mark commanda
-                int index = request.charAt(5) - '0' - 1;
-                markItem(index);
-            } else if (request.startsWith("unmark") && request.length() == 8) {
-                // Checks for unmark command
-                int index = request.charAt(7) - '0' - 1;
-                unmarkItem(index);
-            }
-            else if (request.startsWith("todo")) {
-                Task newTask = new ToDo(request);
-                addTask(newTask);
-            } else if (request.startsWith("deadline")) {
-                Task newTask = new Deadline(request);
-                addTask(newTask);
-            } else if (request.startsWith("event")) {
-                Task newTask = new Event(request);
-                addTask(newTask);
+
+            try {
+                if (command.equals("bye")) {
+                    break;
+                } else if (command.equals("list")) {
+                    printList();
+                } else if (command.equals("todo")) {
+                    Task newTask = new ToDo(request);
+                    addTask(newTask);
+                } else if (command.equals("deadline")) {
+                    Task newTask = new Deadline(request);
+                    addTask(newTask);
+                } else if (command.equals("event")) {
+                    Task newTask = new Event(request);
+                    addTask(newTask);
+                } else if (command.equals("mark")) {
+                    // Checks for mark commanda
+                    int index = splitRequest[1].charAt(0) - '0' - 1;
+                    markItem(index);
+                } else if (command.equals("unmark")) {
+                    // Checks for unmark command
+                    int index = splitRequest[1].charAt(0) - '0' - 1;
+                    unmarkItem(index);
+                } else {
+                    System.out.println("Come on we've been through this. I can " +
+                        "only understand these 3 commands: 'todo', 'deadline', 'event'" +
+                        "Please give it in this format {Command taskname}");
+                }
+            } catch (MissingTaskArgs e) {
+                System.out.println(e.getMessage());
             }
             printHorizontalLine();
         }

@@ -47,17 +47,5 @@
 	4.[E][ ] project meeting (from: Mon 2pm to: 4pm)
 	--------------------------------------------------
 	--------------------------------------------------
-	Hey! Dont just tell me the type of command, tell me what your task is. And leave a space between words will ya.
-	--------------------------------------------------
-	--------------------------------------------------
-	Hey! I dont quite understand you. Remember for Deadline Give it in this format: command name /by date
-	--------------------------------------------------
-	--------------------------------------------------
-	Hey! I dont quite understand you. Remember for Events Give it in this format: command name /from date /to date
-	--------------------------------------------------
-	--------------------------------------------------
-	Hey! I dont quite understand you. Remember for Events Give it in this format: command name /from date /to date
-	--------------------------------------------------
-	--------------------------------------------------
 	Bye. Hope to see you again soon!
 	--------------------------------------------------
