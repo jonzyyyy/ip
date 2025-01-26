@@ -39,13 +39,17 @@ public class Yapper {
                     // Checks for unmark command
                     int index = splitRequest[1].charAt(0) - '0' - 1;
                     unmarkItem(index);
+                } else if (command.equals("delete")) {
+                    deleteTask(splitRequest[1]);
                 } else {
-                    System.out.println("Come on we've been through this. I can " +
-                        "only understand these 3 commands: 'todo', 'deadline', 'event'" +
-                        "Please give it in this format {Command taskname}");
+                    System.out.println("\tCome on we've been through this. I can " +
+                        "only understand these 3 commands: 'todo', 'deadline', 'event'.\n" +
+                        "\tPlease give it in this format {Command taskname}");
                 }
             } catch (MissingTaskArgs e) {
                 System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("\tPlease enter a valid index to remove task according to the list.");
             }
             printHorizontalLine();
         }
@@ -62,7 +66,7 @@ public class Yapper {
     }
 
     private static void printHorizontalLine() {
-        int length = 50;
+        int length = 80;
         String horizontalLine = "-".repeat(length);
         System.out.println("\t" + horizontalLine);
     }
@@ -92,10 +96,17 @@ public class Yapper {
         System.out.println("\t\t" + task);
     }
 
-
     private static void addTask(Task newTask) {
         list.add(newTask);
         System.out.println("\tGot it. I've added this task:\n" + "\t\t" + newTask);
         System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+    }
+
+    private static void deleteTask(String strIndex) {
+        int index = Integer.parseInt(strIndex) - 1;
+        Task task = list.get(index);
+        list.remove(index);
+        System.out.println("\tNoted. I've removed this task:" +
+                "\n\t\t" + task + "\n\tNow you have " + list.size() + " tasks in the list.");
     }
 }

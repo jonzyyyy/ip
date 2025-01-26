@@ -7,8 +7,11 @@ list
 deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
 list
+delete task
+delete 1
 todo
 deadline
 event
 event fakeEvent
+invalidcommand
 bye
