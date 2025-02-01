@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class ToDo extends Task {
 
     public ToDo(String request) {
+        this.request = request;
         String[] splitString = request.split(" ", 2);
 
         if (splitString.length < 2) {

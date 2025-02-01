@@ -8,6 +8,7 @@ public class Event extends Task {
      private String toDatetime;
 
      public Event(String request) {
+         this.request = request;
          String[] splitString = request.split("event | /from | /to ");
 
          if (splitString.length < 3) {
