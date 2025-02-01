@@ -1,4 +1,4 @@
 todo run
 todo walk
-event fly /from 1am /to 12pm
+event fly /from 2025/02/02 1800 /to 2025/02/01 1900
 bye

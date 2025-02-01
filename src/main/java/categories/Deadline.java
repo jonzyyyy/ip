@@ -1,14 +1,19 @@
 package main.java.categories;
 
 import main.java.exceptions.MissingTaskArgs;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    private String datetime;
+    private LocalDate date;
+    private LocalTime time;
 
     public Deadline(String request) {
         this.request = request;
         String[] splitString = request.split("deadline |/by ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
 
         if (splitString.length < 3) {
             throw new MissingTaskArgs("\tHey! I dont quite understand you. Remember for Deadline " +
@@ -16,11 +21,12 @@ public class Deadline extends Task {
         }
 
         this.taskName = splitString[1].trim();
-        this.datetime = splitString[2].trim();
+        this.date = LocalDate.parse(splitString[2].trim(), formatter);
+        this.time = LocalTime.parse(splitString[2].trim(), formatter);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + datetime + ")";
+        return "[D]" + super.toString() + " (by: " + this.date + " " + this.time + ")";
     }
 }
