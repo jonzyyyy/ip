@@ -12,16 +12,20 @@ public abstract class Task {
     @Override
     public String toString() {
         if (completed) {
-           return "[X] " + taskName;
+           return "[X] " + this.taskName;
         }
         return "[ ] " + taskName;
     }
 
     public void setCompleted() {
-        completed = true;
+        this.completed = true;
     }
 
     public void setNotCompleted() {
-        completed = false;
+        this.completed = false;
+    }
+
+    public String getUserInput() {
+        return this.request;
     }
 }

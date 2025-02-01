@@ -1,0 +1,4 @@
+todo run
+todo walk
+event fly /from 1am /to 12pm
+bye

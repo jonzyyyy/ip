@@ -7,6 +7,7 @@ public class Deadline extends Task {
     private String datetime;
 
     public Deadline(String request) {
+        this.request = request;
         String[] splitString = request.split("deadline |/by ");
 
         if (splitString.length < 3) {
