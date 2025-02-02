@@ -11,31 +11,33 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class DataStorage {
-    private static final String FILE_PATH = "../data/YapperTasks.txt";
-    private static File dataFile = new File(FILE_PATH);
-    public DataStorage() {}
+    private File dataFile;
 
-    public static TaskList loadData() {
+    public DataStorage(String filePath) {
+        this.dataFile = new File(filePath);
+    }
+
+    public TaskList loadData() {
         TaskList taskList = new TaskList();
         try {
             // Ensure the parent directory exists
-            File parentDir = dataFile.getParentFile();
+            File parentDir = this.dataFile.getParentFile();
             if (!parentDir.exists()) {
                 parentDir.mkdirs();
             }
 
             // Create file if it doesnt exist
-            if (!dataFile.exists()) {
-                dataFile.createNewFile();
+            if (!this.dataFile.exists()) {
+                this.dataFile.createNewFile();
                 return taskList;
             }
 
             // Reads the file
-            Scanner scanner = new Scanner(dataFile);
+            Scanner scanner = new Scanner(this.dataFile);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
                 if (!line.isEmpty()) {
-                    taskList = Parser.parseCommand(line, taskList);
+                    taskList = Parser.executeCommand(line, taskList);
                 }
             }
             scanner.close();
@@ -45,15 +47,14 @@ public class DataStorage {
         } catch (IOException e) {
             System.out.println("An IO error occurred: " + e.getMessage());
         }
-//        taskList.reverseList();
         return taskList;
     }
-    public static void saveData(TaskList taskList) {
-        try (FileWriter fileWriter = new FileWriter(dataFile)) {
+    public void saveData(TaskList taskList) {
+        try (FileWriter fileWriter = new FileWriter(this.dataFile)) {
             ArrayList<Task> tasks = taskList.getList();
 
             // Ensure the parent directory exists
-            File parentDir = dataFile.getParentFile();
+            File parentDir = this.dataFile.getParentFile();
             if (!parentDir.exists()) {
                 parentDir.mkdirs();
             }
