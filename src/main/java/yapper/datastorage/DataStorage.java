@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import yapper.taskTypes.Task;
 import yapper.taskTypes.TaskList;
 import yapper.parser.Parser;
@@ -14,7 +15,7 @@ import yapper.parser.Parser;
  * Handles loading and saving of tasks from a data file.
  */
 public class DataStorage {
-    private File dataFile;
+    private File file;
 
     /**
      * Constructs a DataStorage instance with the given file path.
@@ -22,7 +23,7 @@ public class DataStorage {
      * @param filePath The path to the file used for storing task data.
      */
     public DataStorage(String filePath) {
-        this.dataFile = new File(filePath);
+        this.file = new File(filePath);
     }
 
     /**
@@ -35,29 +36,28 @@ public class DataStorage {
         TaskList taskList = new TaskList();
         try {
             // Ensure the parent directory exists
-            File parentDir = this.dataFile.getParentFile();
-            if (!parentDir.exists()) {
-                parentDir.mkdirs();
+            File parentDir = this.file.getParentFile();
+            if (!parentDir.exists() && !parentDir.mkdirs()) {
+                System.out.println("Failed to create directory: " + parentDir.getAbsolutePath());
             }
 
-            // Create file if it doesnt exist
-            if (!this.dataFile.exists()) {
-                this.dataFile.createNewFile();
+            // Create file if it does not exist
+            if (!this.file.exists() && !this.file.createNewFile()) {
+                System.out.println("Error: Failed to create file.");
                 return taskList;
             }
 
-            // Reads the file
-            Scanner scanner = new Scanner(this.dataFile);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
-                if (!line.isEmpty()) {
-                    taskList = Parser.executeCommand(line, taskList);
+            // Read the file
+            try (Scanner scanner = new Scanner(this.file)) {
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine().trim();
+                    if (!line.isEmpty()) {
+                        taskList = Parser.executeCommand(line, taskList);
+                    }
                 }
             }
-            scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File does not seem to exist. " +
-                    "Perhaps you might have run out of memory?\n" + e.getMessage());
+            System.out.println("Error: File not found. " + e.getMessage());
         } catch (IOException e) {
             System.out.println("An IO error occurred: " + e.getMessage());
         }
@@ -71,22 +71,21 @@ public class DataStorage {
      * @param taskList The list of tasks to be saved to the file.
      */
     public void saveData(TaskList taskList) {
-        try (FileWriter fileWriter = new FileWriter(this.dataFile)) {
+        try (FileWriter fileWriter = new FileWriter(this.file)) {
             ArrayList<Task> tasks = taskList.getList();
 
             // Ensure the parent directory exists
-            File parentDir = this.dataFile.getParentFile();
-            if (!parentDir.exists()) {
-                parentDir.mkdirs();
+            File parentDir = this.file.getParentFile();
+            if (!parentDir.exists() && !parentDir.mkdirs()) {
+                System.out.println("Failed to create directory: " + parentDir.getAbsolutePath());
             }
 
             // Write to file
-            for (Task task: tasks) {
-                String userInput = task.getUserInput();
-                fileWriter.write(userInput + "\n");
+            for (Task task : tasks) {
+                fileWriter.write(task.getUserInput() + "\n");
             }
         } catch (IOException e) {
-            System.out.println("Error writing to file beacuse of: " + e.getMessage());
+            System.out.println("Error writing to file: " + e.getMessage());
         }
     }
 }

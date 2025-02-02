@@ -6,7 +6,7 @@ package yapper.taskTypes;
  */
 public abstract class Task {
 
-    private boolean completed = false;
+    private boolean isCompleted = false;
     protected String taskName;
     protected String request;
 
@@ -17,8 +17,8 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        if (completed) {
-            return "[X] " + this.taskName;
+        if (isCompleted) {
+           return "[X] " + this.taskName;
         }
         return "[ ] " + taskName;
     }
@@ -27,14 +27,14 @@ public abstract class Task {
      * Marks the task as completed.
      */
     public void setCompleted() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
      * Marks the task as not completed.
      */
     public void setNotCompleted() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**

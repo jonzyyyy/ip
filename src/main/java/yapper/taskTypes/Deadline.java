@@ -3,6 +3,8 @@ package yapper.taskTypes;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import yapper.exceptions.MissingTaskArgs;
 
 /**
@@ -22,17 +24,31 @@ public class Deadline extends Task {
      */
     public Deadline(String request) {
         this.request = request;
-        String[] splitString = request.split("deadline |/by ");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+        String[] splitString = request.split(" /by ", 2); // Ensure correct splitting
 
-        if (splitString.length < 3) {
-            throw new MissingTaskArgs("\tHey! I don't quite understand you. Remember for Deadline " +
+        if (splitString.length < 2) {
+            throw new MissingTaskArgs("\tHey! I dont quite understand you. Remember for Deadline " +
                     "Give it in this format: command name /by date");
         }
 
-        this.taskName = splitString[1].trim();
-        this.date = LocalDate.parse(splitString[2].trim(), formatter);
-        this.time = LocalTime.parse(splitString[2].trim(), formatter);
+        this.taskName = splitString[0].replace("deadline", "").trim(); // Extract task name
+
+        String[] dateTimeParts = splitString[1].trim().split(" ", 2); // Split date and time separately
+        if (dateTimeParts.length < 2) {
+            throw new MissingTaskArgs("\tHey! I dont quite understand you. Remember for Deadline " +
+                    "Give it in this format: command name /by YYYY/MM/DD HHmm");
+        }
+
+        try {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+
+            this.date = LocalDate.parse(dateTimeParts[0].trim(), dateFormatter);
+            this.time = LocalTime.parse(dateTimeParts[1].trim(), timeFormatter);
+        } catch (DateTimeParseException e) {
+            throw new MissingTaskArgs("\tHey! I dont quite understand you. Remember for Deadline " +
+                    "Give it in this format: command name /by YYYY/MM/DD HHmm");
+        }
     }
 
     /**

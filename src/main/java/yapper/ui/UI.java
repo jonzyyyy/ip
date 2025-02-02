@@ -5,7 +5,8 @@ package yapper.ui;
  * including displaying messages and formatting output.
  */
 public class UI {
-    private String name;
+    private final String name;
+    private static final int HORIZONTAL_LINE_LENGTH = 80;
 
     /**
      * Constructs a {@code UI} instance with the chatbot's name.
@@ -30,9 +31,7 @@ public class UI {
      * Prints a horizontal line for visual separation in the console.
      */
     public void printHorizontalLine() {
-        int length = 80;
-        String horizontalLine = "-".repeat(length);
-        System.out.println("\t" + horizontalLine);
+        System.out.println("\t" + "-".repeat(HORIZONTAL_LINE_LENGTH));
     }
 
     /**

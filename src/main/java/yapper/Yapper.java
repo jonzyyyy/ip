@@ -11,11 +11,11 @@ import yapper.taskTypes.TaskList;
  * and command execution.
  */
 public class Yapper {
-    private Scanner scanner;
-    private TaskList taskList;
-    private DataStorage dataStorage;
+    private final Scanner scanner;
+    private final TaskList taskList;
+    private final DataStorage dataStorage;
     private final String BOT_NAME = "Yapper";
-    private UI ui;
+    private final UI ui;
 
     /**
      * Constructs a {@code Yapper} chatbot instance.
@@ -24,10 +24,10 @@ public class Yapper {
      * @param filePath The file path for storing and loading tasks.
      */
     public Yapper(String filePath) {
-        this.dataStorage = new DataStorage(filePath);
-        this.taskList = this.dataStorage.loadData();
-        this.scanner = new Scanner(System.in);
-        this.ui = new UI(BOT_NAME);
+        dataStorage = new DataStorage(filePath);
+        taskList = dataStorage.loadData();
+        scanner = new Scanner(System.in);
+        ui = new UI(BOT_NAME);
     }
 
     /**
@@ -35,22 +35,22 @@ public class Yapper {
      * The chatbot continues running until the user enters the "bye" command.
      */
     public void run() {
-        this.ui.printIntroduction();
+        ui.printIntroduction();
         while (true) {
-            this.taskList.activateToPrint();
+            taskList.activateToPrint();
             String request = scanner.nextLine().trim();
-            this.ui.printHorizontalLine();
+            ui.printHorizontalLine();
             String command = Parser.parseCommand(request);
             if (command.equals("bye")) {
                 break;
             }
-            this.taskList = Parser.executeCommand(request, this.taskList);
-            this.ui.printHorizontalLine();
-            this.dataStorage.saveData(taskList);
+            Parser.executeCommand(request, taskList); // Modify `taskList` directly
+            ui.printHorizontalLine();
+            dataStorage.saveData(taskList);
         }
-        this.ui.printExit();
-        scanner.close();
-        this.ui.printHorizontalLine();
+        ui.printExit();
+        scanner.close(); // Ensure scanner is properly closed
+        ui.printHorizontalLine();
     }
 
     /**
