@@ -1,6 +1,10 @@
-package main.java;
+package yapper;
 
 import java.util.Scanner;
+import yapper.parser.Parser;
+import yapper.ui.UI;
+import yapper.datastorage.DataStorage;
+import yapper.taskTypes.TaskList;
 
 public class Yapper {
     private Scanner scanner;

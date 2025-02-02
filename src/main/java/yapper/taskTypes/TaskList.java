@@ -1,7 +1,6 @@
-package main.java;
+package yapper.taskTypes;
 
 import java.util.ArrayList;
-import main.java.categories.Task;
 import java.util.Collections;
 
 public class TaskList {

@@ -1,11 +1,12 @@
-package main.java;
+package yapper.parser;
 
-import main.java.exceptions.InvalidTaskType;
-import main.java.exceptions.MissingTaskArgs;
-import main.java.categories.Event;
-import main.java.categories.Deadline;
-import main.java.categories.ToDo;
-import main.java.categories.Task;
+import yapper.exceptions.InvalidTaskType;
+import yapper.exceptions.MissingTaskArgs;
+import yapper.taskTypes.Event;
+import yapper.taskTypes.Deadline;
+import yapper.taskTypes.ToDo;
+import yapper.taskTypes.Task;
+import yapper.taskTypes.TaskList;
 
 
 public class Parser {

@@ -1,4 +1,4 @@
-package main.java;
+package yapper.ui;
 
 public class UI {
     private String name;

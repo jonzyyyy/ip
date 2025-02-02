@@ -1,9 +1,9 @@
-package main.java.categories;
+package yapper.taskTypes;
 
-import main.java.exceptions.MissingTaskArgs;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import yapper.exceptions.MissingTaskArgs;
 
 public class Event extends Task {
 

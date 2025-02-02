@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package yapper.exceptions;
 
 public class InvalidTaskType extends RuntimeException {
     public InvalidTaskType(String message) {

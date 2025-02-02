@@ -13,7 +13,7 @@ run_test() {
     fi
 
     # Run the program, feed commands from input file and redirect the output to the ACTUAL.TXT
-    java -classpath ../bin main.java.Yapper < "$input_file" > "$actual_file"
+    java -classpath ../bin yapper.Yapper < "$input_file" > "$actual_file"
 
     # Convert to UNIX format
     cp "$expected_file" EXPECTED-UNIX.TXT
@@ -37,7 +37,7 @@ fi
 
 # Compile the code into the bin folder, terminates if error occurred
 echo "......................................................NEW TEST......................................................"
-if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java ../src/main/java/exceptions/*.java ../src/main/java/categories/*.java
+if ! javac -cp ../src/main/java/yapper -Xlint:none -d ../bin $(find ../src/main/java/yapper -name "*.java")
 then
     echo "********** BUILD FAILURE **********"
     exit 1

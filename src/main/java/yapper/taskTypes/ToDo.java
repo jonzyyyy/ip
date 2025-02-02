@@ -1,5 +1,6 @@
-package main.java.categories;
-import main.java.exceptions.MissingTaskArgs;
+package yapper.taskTypes;
+
+import yapper.exceptions.MissingTaskArgs;
 import java.util.Arrays;
 
 public class ToDo extends Task {

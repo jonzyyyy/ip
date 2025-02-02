@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package yapper.exceptions;
 
 public class MissingTaskArgs extends RuntimeException {
     public MissingTaskArgs(String message) {
