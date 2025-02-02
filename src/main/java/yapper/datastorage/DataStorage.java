@@ -10,13 +10,27 @@ import yapper.taskTypes.Task;
 import yapper.taskTypes.TaskList;
 import yapper.parser.Parser;
 
+/**
+ * Handles loading and saving of tasks from a data file.
+ */
 public class DataStorage {
     private File dataFile;
 
+    /**
+     * Constructs a DataStorage instance with the given file path.
+     *
+     * @param filePath The path to the file used for storing task data.
+     */
     public DataStorage(String filePath) {
         this.dataFile = new File(filePath);
     }
 
+    /**
+     * Loads tasks from the data file.
+     * If the file does not exist, it is created, and an empty task list is returned.
+     *
+     * @return A TaskList containing the tasks loaded from the file.
+     */
     public TaskList loadData() {
         TaskList taskList = new TaskList();
         try {
@@ -49,6 +63,13 @@ public class DataStorage {
         }
         return taskList;
     }
+
+    /**
+     * Saves the current list of tasks to the data file.
+     * If the parent directory does not exist, it is created before writing to the file.
+     *
+     * @param taskList The list of tasks to be saved to the file.
+     */
     public void saveData(TaskList taskList) {
         try (FileWriter fileWriter = new FileWriter(this.dataFile)) {
             ArrayList<Task> tasks = taskList.getList();
