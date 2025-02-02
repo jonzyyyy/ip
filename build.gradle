@@ -13,6 +13,12 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
 }
 
+sourceSets {
+    test {
+        java.srcDirs = ['src/test/java'] // Ensure test sources are recognized
+    }
+}
+
 test {
     useJUnitPlatform()
 
@@ -28,14 +34,18 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("yapper.Yapper") // Updated main class
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "yapper"
     archiveClassifier = null
+    archiveFileName = "yapper.jar"  // Custom JAR file name
+    manifest {
+        attributes 'Main-Class': 'yapper.Yapper' // Ensures correct entry point for JAR
+    }
 }
 
-run{
+run {
     standardInput = System.in
 }
