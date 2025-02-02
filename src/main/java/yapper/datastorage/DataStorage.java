@@ -2,12 +2,10 @@ package yapper.datastorage;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Collections;
 import yapper.taskTypes.Task;
 import yapper.taskTypes.TaskList;
 import yapper.parser.Parser;

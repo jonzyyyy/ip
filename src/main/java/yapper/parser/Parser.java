@@ -1,13 +1,11 @@
 package yapper.parser;
 
-import yapper.exceptions.InvalidTaskType;
 import yapper.exceptions.MissingTaskArgs;
 import yapper.taskTypes.Event;
 import yapper.taskTypes.Deadline;
 import yapper.taskTypes.ToDo;
 import yapper.taskTypes.Task;
 import yapper.taskTypes.TaskList;
-
 
 public class Parser {
 
@@ -21,31 +19,38 @@ public class Parser {
         String[] splitRequest = request.split(" ");
         String command = splitRequest[0];
         try {
-            if (command.equals("list")) {
+            switch (command) {
+            case "list" -> {
                 System.out.println(taskList);
-            } else if (command.equals("todo")) {
+            }
+            case "todo" -> {
                 Task newTask = new ToDo(request);
                 taskList.addTask(newTask);
-            } else if (command.equals("deadline")) {
+            }
+            case "deadline" -> {
                 Task newTask = new Deadline(request);
                 taskList.addTask(newTask);
-            } else if (command.equals("event")) {
+            }
+            case "event" -> {
                 Task newTask = new Event(request);
                 taskList.addTask(newTask);
-            } else if (command.equals("mark")) {
-                // Checks for mark commanda
+            }
+            case "mark" -> {
                 int index = splitRequest[1].charAt(0) - '0' - 1;
                 taskList.markItem(index);
-            } else if (command.equals("unmark")) {
-                // Checks for unmark command
+            }
+            case "unmark" -> {
                 int index = splitRequest[1].charAt(0) - '0' - 1;
                 taskList.unmarkItem(index);
-            } else if (command.equals("delete")) {
+            }
+            case "delete" -> {
                 taskList.deleteTask(splitRequest[1]);
-            } else {
+            }
+            default -> {
                 System.out.println("\tCome on we've been through this.\n" +
                     "\tonly understand these 3 commands: 'todo', 'deadline', 'event'.\n" +
                     "\tPlease give it in this format {Command taskname}");
+            }
             }
         } catch (MissingTaskArgs e) {
             System.out.println(e.getMessage());
