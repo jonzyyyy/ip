@@ -3,22 +3,48 @@ package yapper.taskTypes;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Represents a list of tasks that can be manipulated by adding, removing,
+ * marking, and unmarking tasks. Supports optional printing of operations.
+ */
 public class TaskList {
     private ArrayList<Task> list;
     private boolean toPrint = false;
 
-    public TaskList(){
-        this.list =  new ArrayList<Task>();
+    /**
+     * Constructs an empty {@code TaskList}.
+     */
+    public TaskList() {
+        this.list = new ArrayList<Task>();
     }
 
+    /**
+     * Activates printing of messages when tasks are added, removed, or modified.
+     */
     public void activateToPrint() {
         this.toPrint = true;
     }
 
+    /**
+     * Deactivates printing of messages when tasks are added, removed, or modified.
+     */
+    public void deactivateToPrint() {
+        this.toPrint = false;
+    }
+
+    /**
+     * Reverses the order of tasks in the list.
+     */
     public void reverseList() {
         Collections.reverse(this.list);
     }
 
+    /**
+     * Adds a task to the task list.
+     * If printing is enabled, a confirmation message is displayed.
+     *
+     * @param newTask The task to be added.
+     */
     public void addTask(Task newTask) {
         this.list.add(newTask);
         if (this.toPrint) {
@@ -27,6 +53,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task from the task list based on its index.
+     * If printing is enabled, a confirmation message is displayed.
+     *
+     * @param strIndex The index of the task to be removed (1-based).
+     */
     public void deleteTask(String strIndex) {
         int index = Integer.parseInt(strIndex) - 1;
         Task task = this.list.get(index);
@@ -37,6 +69,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task as completed.
+     * If printing is enabled, a confirmation message is displayed.
+     *
+     * @param index The zero-based index of the task to be marked as done.
+     */
     public void markItem(int index) {
         Task task = this.list.get(index);
         task.setCompleted();
@@ -46,6 +84,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unmarks a completed task, setting it back to not completed.
+     * If printing is enabled, a confirmation message is displayed.
+     *
+     * @param index The zero-based index of the task to be unmarked.
+     */
     public void unmarkItem(int index) {
         Task task = this.list.get(index);
         task.setNotCompleted();
@@ -55,15 +99,25 @@ public class TaskList {
         }
     }
 
+    /**
+     * Retrieves the list of tasks.
+     *
+     * @return An {@code ArrayList} containing all tasks.
+     */
     public ArrayList<Task> getList() {
         return this.list;
     }
 
+    /**
+     * Returns a string representation of the task list, displaying all tasks in order.
+     *
+     * @return A formatted string representing the list of tasks.
+     */
     @Override
     public String toString() {
         String str = "\tHere are the tasks in your list:";
         for (int i = 0; i < list.size(); i++) {
-            str += "\n\t" + Integer.toString(i + 1) + "." + list.get(i);
+            str += "\n\t" + (i + 1) + "." + list.get(i);
         }
         return str;
     }
