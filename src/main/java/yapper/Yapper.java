@@ -23,14 +23,14 @@ public class Yapper {
     public void run() {
         this.ui.printIntroduction();
         while (true) {
-            taskList.activateToPrint();
+            this.taskList.activateToPrint();
             String request = scanner.nextLine().trim();
             this.ui.printHorizontalLine();
             String command = Parser.parseCommand(request);
             if (command.equals("bye")) {
                 break;
             }
-            taskList = Parser.executeCommand(request, taskList);
+            this.taskList = Parser.executeCommand(request, this.taskList);
             this.ui.printHorizontalLine();
             this.dataStorage.saveData(taskList);
         }
