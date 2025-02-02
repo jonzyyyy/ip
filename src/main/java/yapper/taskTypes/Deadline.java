@@ -27,7 +27,7 @@ public class Deadline extends Task {
         String[] splitString = request.split(" /by ", 2); // Ensure correct splitting
 
         if (splitString.length < 2) {
-            throw new MissingTaskArgs("\tHey! I dont quite understand you. Remember for Deadline " +
+            throw new MissingTaskArgs("\tHey! I don't quite understand you. Remember for Deadline " +
                     "Give it in this format: command name /by date");
         }
 
@@ -35,7 +35,7 @@ public class Deadline extends Task {
 
         String[] dateTimeParts = splitString[1].trim().split(" ", 2); // Split date and time separately
         if (dateTimeParts.length < 2) {
-            throw new MissingTaskArgs("\tHey! I dont quite understand you. Remember for Deadline " +
+            throw new MissingTaskArgs("\tHey! I don't quite understand you. Remember for Deadline " +
                     "Give it in this format: command name /by YYYY/MM/DD HHmm");
         }
 
@@ -46,7 +46,7 @@ public class Deadline extends Task {
             this.date = LocalDate.parse(dateTimeParts[0].trim(), dateFormatter);
             this.time = LocalTime.parse(dateTimeParts[1].trim(), timeFormatter);
         } catch (DateTimeParseException e) {
-            throw new MissingTaskArgs("\tHey! I dont quite understand you. Remember for Deadline " +
+            throw new MissingTaskArgs("\tHey! I don't quite understand you. Remember for Deadline " +
                     "Give it in this format: command name /by YYYY/MM/DD HHmm");
         }
     }

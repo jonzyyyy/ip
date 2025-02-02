@@ -55,16 +55,16 @@
 	Now you have 3 tasks in the list.
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
-	Hey! Dont just tell me the type of command, tell me what your task is. And leave a space between words will ya.
+	Hey! Don't just tell me the type of command, tell me what your task is. And leave a space between words, will ya.
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
-	Hey! I dont quite understand you. Remember for Deadline Give it in this format: command name /by date
+	Hey! I don't quite understand you. Remember for Deadline Give it in this format: command name /by date
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
-	Hey! I dont quite understand you. Remember for Events Give it in this format: command name /from {YYYY/MM/DD} {0000} /to {YYYY/MM/DD} {2359}
+	Hey! I don't quite understand you. Remember for Events Give it in this format: command name /from {YYYY/MM/DD} {0000} /to {YYYY/MM/DD} {2359}
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
-	Hey! I dont quite understand you. Remember for Events Give it in this format: command name /from {YYYY/MM/DD} {0000} /to {YYYY/MM/DD} {2359}
+	Hey! I don't quite understand you. Remember for Events Give it in this format: command name /from {YYYY/MM/DD} {0000} /to {YYYY/MM/DD} {2359}
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	Come on we've been through this.
