@@ -1,7 +1,8 @@
 package yapper.ui;
 
 public class UI {
-    private String name;
+    private final String name;
+    private static final int HORIZONTAL_LINE_LENGTH = 80;
 
     public UI(String name) {
         this.name = name;
@@ -15,13 +16,10 @@ public class UI {
     }
 
     public void printHorizontalLine() {
-        int length = 80;
-        String horizontalLine = "-".repeat(length);
-        System.out.println("\t" + horizontalLine);
+        System.out.println("\t" + "-".repeat(HORIZONTAL_LINE_LENGTH));
     }
 
     public void printExit() {
         System.out.println("\tBye. Hope to see you again soon!");
     }
-
 }

@@ -2,24 +2,24 @@ package yapper.taskTypes;
 
 public abstract class Task {
 
-    private boolean completed = false;
+    private boolean isCompleted = false;
     protected String taskName;
     protected String request;
 
     @Override
     public String toString() {
-        if (completed) {
+        if (isCompleted) {
            return "[X] " + this.taskName;
         }
         return "[ ] " + taskName;
     }
 
     public void setCompleted() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     public void setNotCompleted() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public String getUserInput() {
