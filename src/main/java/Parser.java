@@ -12,7 +12,11 @@ public class Parser {
 
     private Parser() {}
 
-    public static TaskList parseCommand(String request, TaskList taskList) {
+    public static String parseCommand(String request) {
+        return request.split(" ")[0];
+    }
+
+    public static TaskList executeCommand (String request, TaskList taskList) {
         String[] splitRequest = request.split(" ");
         String command = splitRequest[0];
         try {
