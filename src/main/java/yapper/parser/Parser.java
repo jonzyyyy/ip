@@ -46,6 +46,11 @@ public class Parser {
             case "delete" -> {
                 taskList.deleteTask(splitRequest[1]);
             }
+            case "find" -> {
+                // Splits the request into "find" "Keyword / keywords"
+                String keyword = request.split(" ", 2)[1];
+                taskList.findTask(keyword);
+            }
             default -> {
                 System.out.println("\tCome on we've been through this.\n" +
                     "\tonly understand these 3 commands: 'todo', 'deadline', 'event'.\n" +

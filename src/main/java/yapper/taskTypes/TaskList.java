@@ -37,6 +37,24 @@ public class TaskList {
         }
     }
 
+    public void findTask(String keyword) {
+        int index = 1;
+        boolean hasFoundTask = false;
+        for (Task task : list) {
+            if (task.taskName.contains(keyword)) {
+                if (!hasFoundTask) {
+                    System.out.println("\tHere are the matching tasks in your list:");
+                    hasFoundTask = true;
+                }
+                System.out.println("\t" + index + "." + task);
+                index++;
+            }
+        }
+        if (!hasFoundTask) {
+            System.out.println("\t" + "There are no matching tasks in your list containing: " + keyword);
+        }
+    }
+
     public void markItem(int index) {
         Task task = this.list.get(index);
         task.setCompleted();

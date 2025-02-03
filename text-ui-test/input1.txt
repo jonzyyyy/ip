@@ -14,5 +14,8 @@ deadline
 event
 event fakeEvent
 invalidcommand
+mark 2
+find book
+find nonexistent task
 list
 bye
