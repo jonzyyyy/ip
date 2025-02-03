@@ -77,6 +77,24 @@ public class TaskList {
         }
     }
 
+    public void findTask(String keyword) {
+        int index = 1;
+        boolean hasFoundTask = false;
+        for (Task task : tasks) {
+            if (task.taskName.contains(keyword)) {
+                if (!hasFoundTask) {
+                    System.out.println("\tHere are the matching tasks in your list:");
+                    hasFoundTask = true;
+                }
+                System.out.println("\t" + index + "." + task);
+                index++;
+            }
+        }
+        if (!hasFoundTask) {
+            System.out.println("\t" + "There are no matching tasks in your list containing: " + keyword);
+        }
+    }
+
     private void toggleTaskCompletion(int index, boolean completed) {
         if (index < 0 || index >= tasks.size()) {
             System.out.println("\tPlease enter a valid index to remove task according to the list.");
@@ -98,6 +116,7 @@ public class TaskList {
             System.out.println("\t\t" + task);
         }
     }
+
 
     /**
      * Marks a task as completed.
