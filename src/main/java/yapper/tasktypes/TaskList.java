@@ -1,4 +1,4 @@
-package yapper.taskTypes;
+package yapper.tasktypes;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,6 +77,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds respective tasks from the task list based on string matching.
+     *
+     * @param keyword The keyword(s) that may be found in a task name
+     */
     public void findTask(String keyword) {
         int index = 1;
         boolean hasFoundTask = false;

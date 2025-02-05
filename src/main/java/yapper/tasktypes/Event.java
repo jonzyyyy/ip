@@ -1,4 +1,4 @@
-package yapper.taskTypes;
+package yapper.tasktypes;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -29,8 +29,8 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
 
         if (splitString.length < 4) {
-            throw new MissingTaskArgs("\tHey! I don't quite understand you. Remember for Events " +
-                    "Give it in this format: command name /from {YYYY/MM/DD} {0000} /to {YYYY/MM/DD} {2359}");
+            throw new MissingTaskArgs("\tHey! I don't quite understand you. Remember for Events "
+                    + "Give it in this format: command name /from {YYYY/MM/DD} {0000} /to {YYYY/MM/DD} {2359}");
         }
 
         this.taskName = splitString[1].trim();
@@ -47,7 +47,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.fromDate + " " + this.fromTime +
-                " to: " + this.toDate + " " + this.toTime + ")";
+        return "[E]" + super.toString() + " (from: " + this.fromDate + " " + this.fromTime
+                + " to: " + this.toDate + " " + this.toTime + ")";
     }
 }

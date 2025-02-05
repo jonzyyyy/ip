@@ -5,8 +5,8 @@ package yapper.ui;
  * including displaying messages and formatting output.
  */
 public class UI {
-    private final String name;
     private static final int HORIZONTAL_LINE_LENGTH = 80;
+    private final String name;
 
     /**
      * Constructs a {@code UI} instance with the chatbot's name.

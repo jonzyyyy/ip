@@ -1,4 +1,4 @@
-package yapper.taskTypes;
+package yapper.tasktypes;
 
 import yapper.exceptions.MissingTaskArgs;
 
@@ -18,8 +18,8 @@ public class ToDo extends Task {
         this.request = request;
         String[] splitString = request.split(" ", 2);
         if (splitString.length < 2) {
-            throw new MissingTaskArgs("\tHey! Don't just tell me the type of command, tell me " +
-                "what your task is. And leave a space between words, will ya.");
+            throw new MissingTaskArgs("\tHey! Don't just tell me the type of command, tell me "
+                    + "what your task is. And leave a space between words, will ya.");
         }
         this.taskName = splitString[1];
     }
@@ -31,6 +31,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-       return "[T]" + super.toString();
+        return "[T]" + super.toString();
     }
 }

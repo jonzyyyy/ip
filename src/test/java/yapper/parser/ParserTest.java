@@ -1,10 +1,11 @@
 package yapper.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import yapper.taskTypes.TaskList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import yapper.tasktypes.TaskList;
 
 public class ParserTest {
     private TaskList taskList;
@@ -15,7 +16,7 @@ public class ParserTest {
     }
 
     @Test
-    void testExecuteCommand_ValidTodo() {
+    void testExecuteCommandValidTodo() {
         String input = "todo Buy milk";
         taskList = Parser.executeCommand(input, taskList);
 
@@ -24,16 +25,17 @@ public class ParserTest {
     }
 
     @Test
-    void testExecuteCommand_ValidDeadline() {
+    void testExecuteCommandValidDeadline() {
         String input = "deadline Submit report /by 2024/02/05 0000";
         taskList = Parser.executeCommand(input, taskList);
 
         assertEquals(1, taskList.getList().size(), "TaskList should contain 1 task after valid 'deadline' command");
-        assertEquals("deadline Submit report /by 2024/02/05 0000", taskList.getList().get(0).getUserInput(), "Deadline task should match input");
+        assertEquals("deadline Submit report /by 2024/02/05 0000", taskList.getList().get(0).getUserInput(),
+                "Deadline task should match input");
     }
 
     @Test
-    void testExecuteCommand_InvalidCommand() {
+    void testExecuteCommandInvalidCommand() {
         String input = "randomtext xyz";
         taskList = Parser.executeCommand(input, taskList);
 
@@ -41,7 +43,7 @@ public class ParserTest {
     }
 
     @Test
-    void testExecuteCommand_EmptyInput() {
+    void testExecuteCommandEmptyInput() {
         String input = "";
         taskList = Parser.executeCommand(input, taskList);
 

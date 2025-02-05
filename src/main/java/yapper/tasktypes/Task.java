@@ -1,4 +1,4 @@
-package yapper.taskTypes;
+package yapper.tasktypes;
 
 /**
  * Represents an abstract task that can be marked as completed or not completed.
@@ -6,9 +6,9 @@ package yapper.taskTypes;
  */
 public abstract class Task {
 
-    private boolean isCompleted = false;
-    protected String taskName;
     protected String request;
+    protected String taskName;
+    private boolean isCompleted = false;
 
     /**
      * Returns a string representation of the task, indicating its completion status.
@@ -18,7 +18,7 @@ public abstract class Task {
     @Override
     public String toString() {
         if (isCompleted) {
-           return "[X] " + this.taskName;
+            return "[X] " + this.taskName;
         }
         return "[ ] " + taskName;
     }

@@ -1,11 +1,11 @@
-package yapper.taskTypes;
-
-import yapper.exceptions.MissingTaskArgs;
+package yapper.tasktypes;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import yapper.exceptions.MissingTaskArgs;
 
 /**
  * Represents a deadline task with a specific date and time.
@@ -27,9 +27,9 @@ public class Deadline extends Task {
         String[] splitString = request.split(" /by ", 2);
 
         if (splitString.length < 2) {
-            throw new MissingTaskArgs("\tHey! I don't quite understand you. " +
-                    "Remember for Deadline " +
-                    "Give it in this format: command name /by date");
+            throw new MissingTaskArgs("\tHey! I don't quite understand you. "
+                    + "Remember for Deadline "
+                    + "Give it in this format: command name /by date");
         }
 
         // Extract task name
@@ -39,9 +39,9 @@ public class Deadline extends Task {
         String[] dateTimeParts = splitString[1].trim().split(" ", 2);
 
         if (dateTimeParts.length < 2) {
-            throw new MissingTaskArgs("\tHey! I don't quite understand you. " +
-                    "Remember for Deadline Give it in this format: " +
-                    "command name /by YYYY/MM/DD HHmm");
+            throw new MissingTaskArgs("\tHey! I don't quite understand you. "
+                    + "Remember for Deadline Give it in this format: "
+                    + "command name /by YYYY/MM/DD HHmm");
         }
 
         try {
@@ -51,9 +51,9 @@ public class Deadline extends Task {
             this.date = LocalDate.parse(dateTimeParts[0].trim(), dateFormatter);
             this.time = LocalTime.parse(dateTimeParts[1].trim(), timeFormatter);
         } catch (DateTimeParseException e) {
-            throw new MissingTaskArgs("\tHey! I don't quite understand you. " +
-                    "Remember for Deadline Give it in this format: " +
-                    "command name /by YYYY/MM/DD HHmm");
+            throw new MissingTaskArgs("\tHey! I don't quite understand you. "
+                    + "Remember for Deadline Give it in this format: "
+                    + "command name /by YYYY/MM/DD HHmm");
         }
     }
 

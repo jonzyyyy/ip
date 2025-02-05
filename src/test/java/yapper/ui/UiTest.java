@@ -1,15 +1,15 @@
 package yapper.ui;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-class UITest {
+class UiTest {
     private UI ui;
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -46,12 +46,10 @@ class UITest {
     @Test
     void testPrintHorizontalLine() {
         ui.printHorizontalLine();
-        String actualOutput = outputStream.toString();  // remove trailing newline
+        String actualOutput = outputStream.toString(); // remove trailing newline
         String expectedOutput = "\t" + "-".repeat(80) + "\n";
 
-        assertEquals(expectedOutput, actualOutput,
-    "Horizontal line should be 80 dashes, preceded by a tab."
-        );
+        assertEquals(expectedOutput, actualOutput, "Horizontal line should be 80 dashes, preceded by a tab.");
     }
 
     @Test
@@ -65,10 +63,10 @@ class UITest {
         );
     }
 
-//     Optionally, restore System.out after each test
-//     (especially if you have more tests in the suite that need console output)
-     @AfterEach
-     void tearDown() {
-         System.setOut(originalOut);
-     }
+    // Optionally, restore System.out after each test
+    // (especially if you have more tests in the suite that need console output)
+    @AfterEach
+    void tearDown() {
+        System.setOut(originalOut);
+    }
 }
