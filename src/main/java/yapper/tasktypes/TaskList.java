@@ -1,7 +1,7 @@
 package yapper.tasktypes;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 
 /**
  * Represents a list of tasks that can be manipulated by adding, removing,
@@ -33,24 +33,19 @@ public class TaskList {
     }
 
     /**
-     * Reverses the order of tasks in the list.
-     */
-    public void reverseList() {
-        Collections.reverse(this.tasks);
-    }
-
-    /**
      * Adds a task to the task list.
      * If printing is enabled, a confirmation message is displayed.
      *
      * @param newTask The task to be added.
      */
-    public void addTask(Task newTask) {
+    public String addTask(Task newTask) {
+        String str = "";
         this.tasks.add(newTask);
         if (this.isToPrint) {
-            System.out.println("\tGot it. I've added this task:\n\t\t" + newTask);
-            System.out.println("\tNow you have " + this.tasks.size() + " tasks in the list.");
+            str = ("Got it. I've added this task:\n\t" + newTask
+                + "\nNow you have " + this.tasks.size() + " tasks in the list.");
         }
+        return str;
     }
 
     /**
@@ -59,22 +54,23 @@ public class TaskList {
      *
      * @param strIndex The index of the task to be removed (1-based).
      */
-    public void deleteTask(String strIndex) {
+    public String deleteTask(String strIndex) {
+        String str = "";
         int index;
         try {
             index = Integer.parseInt(strIndex) - 1;
             if (index < 0 || index >= this.tasks.size()) {
-                System.out.println("\tError: Invalid index. Please enter a number between 1 and " + this.tasks.size());
-                return;
+                str = "Error: Invalid index. Please enter a number between 1 and " + this.tasks.size();
             }
             Task task = this.tasks.remove(index);
             if (this.isToPrint) {
-                System.out.println("\tNoted. I've removed this task:\n\t\t" + task);
-                System.out.println("\tNow you have " + this.tasks.size() + " tasks in the list.");
+                str = "Noted. I've removed this task:\n\t" + task
+                    + "Now you have " + this.tasks.size() + " tasks in the list.";
             }
         } catch (NumberFormatException e) {
-            System.out.println("\tPlease enter a valid index to remove task according to the list.");
+            return "Please enter a valid index to remove task according to the list.";
         }
+        return str;
     }
 
     /**
@@ -82,44 +78,47 @@ public class TaskList {
      *
      * @param keyword The keyword(s) that may be found in a task name
      */
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
+        StringBuilder sb = new StringBuilder();
         int index = 1;
         boolean hasFoundTask = false;
         for (Task task : tasks) {
             if (task.taskName.contains(keyword)) {
                 if (!hasFoundTask) {
-                    System.out.println("\tHere are the matching tasks in your list:");
+                    sb.append("Here are the matching tasks in your list:");
                     hasFoundTask = true;
                 }
-                System.out.println("\t" + index + "." + task);
+                sb.append("\n\t" + index + "." + task);
                 index++;
             }
         }
         if (!hasFoundTask) {
-            System.out.println("\t" + "There are no matching tasks in your list containing: " + keyword);
+            sb.append("There are no matching tasks in your list containing: " + keyword);
         }
+        return sb.toString();
     }
 
-    private void toggleTaskCompletion(int index, boolean completed) {
+    private String toggleTaskCompletion(int index, boolean completed) {
+        String str = "";
         if (index < 0 || index >= tasks.size()) {
-            System.out.println("\tPlease enter a valid index to remove task according to the list.");
-            return;
+            str = "Please enter a valid index to remove task according to the list.";
         }
         Task task = tasks.get(index);
         if (completed) {
             task.setCompleted();
             if (isToPrint) {
-                System.out.println("\tNice! I've marked this task as done:");
+                str = "Nice! I've marked this task as done:";
             }
         } else {
             task.setNotCompleted();
             if (isToPrint) {
-                System.out.println("\tOK, I've marked this task as not done yet:");
+                str = "OK, I've marked this task as not done yet:";
             }
         }
         if (isToPrint) {
-            System.out.println("\t\t" + task);
+            str += "\n\t" + task;
         }
+        return str;
     }
 
 
@@ -129,8 +128,8 @@ public class TaskList {
      *
      * @param index The zero-based index of the task to be marked as done.
      */
-    public void markItem(int index) {
-        toggleTaskCompletion(index, true);
+    public String markItem(int index) {
+        return toggleTaskCompletion(index, true);
     }
 
     /**
@@ -139,8 +138,8 @@ public class TaskList {
      *
      * @param index The zero-based index of the task to be unmarked.
      */
-    public void unmarkItem(int index) {
-        toggleTaskCompletion(index, false);
+    public String unmarkItem(int index) {
+        return toggleTaskCompletion(index, false);
     }
 
     /**

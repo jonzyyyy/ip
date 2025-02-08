@@ -20,24 +20,14 @@ public class UI {
     /**
      * Prints the chatbot's introduction message.
      */
-    public void printIntroduction() {
-        printHorizontalLine();
-        System.out.println("\tHello! I'm " + name);
-        System.out.println("\tWhat can I do for you?");
-        printHorizontalLine();
-    }
-
-    /**
-     * Prints a horizontal line for visual separation in the console.
-     */
-    public void printHorizontalLine() {
-        System.out.println("\t" + "-".repeat(HORIZONTAL_LINE_LENGTH));
+    public String getIntroduction() {
+        return "Hello! I'm " + name + ". What can I do for you?";
     }
 
     /**
      * Prints the chatbot's exit message.
      */
-    public void printExit() {
-        System.out.println("\tBye. Hope to see you again soon!");
+    public String getExit() {
+        return "Bye. Hope to see you again soon!";
     }
 }

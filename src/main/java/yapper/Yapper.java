@@ -12,7 +12,7 @@ import yapper.ui.UI;
  * The main class for the Yapper chatbot, which manages task storage, user interactions, and command execution.
  */
 public class Yapper {
-    private Scanner scanner;
+    private static String FILE_PATH = "../data/YapperTasks.txt";
     private TaskList taskList;
     private DataStorage dataStorage;
     private String botName = "Yapper";
@@ -21,46 +21,31 @@ public class Yapper {
     /**
      * Constructs a {@code Yapper} chatbot instance. Initializes data storage, loads existing tasks, and sets up user
      * interaction.
-     *
-     * @param filePath The file path for storing and loading tasks.
      */
-    public Yapper(String filePath) {
-        dataStorage = new DataStorage(filePath);
+    public Yapper() {
+        dataStorage = new DataStorage(FILE_PATH);
         taskList = dataStorage.loadData();
-        scanner = new Scanner(System.in);
+        taskList.activateToPrint();
         ui = new UI(botName);
     }
 
-    /**
-     * The entry point of the Yapper chatbot application. Initializes and starts the chatbot.
-     *
-     * @param args Command-line arguments (not used).
-     */
-    public static void main(String[] args) {
-        new Yapper("../data/YapperTasks.txt").run();
+    public String getIntroduction() {
+        return ui.getIntroduction();
     }
 
     /**
      * Runs the chatbot, handling user input, executing commands, and managing task persistence. The chatbot
      * continues running until the user enters the "bye" command.
      */
-    public void run() {
-        ui.printIntroduction();
-        while (true) {
-            taskList.activateToPrint();
-            String request = scanner.nextLine().trim();
-            ui.printHorizontalLine();
-            String command = Parser.parseCommand(request);
-            if (command.equals("bye")) {
-                break;
-            }
-            // Modify `taskList` directly
-            Parser.executeCommand(request, taskList);
-            ui.printHorizontalLine();
-            dataStorage.saveData(taskList);
+    public String getResponse(String input) {
+        String request = input.trim();
+        String command = Parser.parseCommand(request);
+        if (command.equals("bye")) {
+            return ui.getExit();
         }
-        ui.printExit();
-        scanner.close(); // Ensure scanner is properly closed
-        ui.printHorizontalLine();
+        // Modifies `taskList` directly
+        String response = Parser.executeCommand(request, taskList);
+        dataStorage.saveData(taskList);
+        return response;
     }
 }

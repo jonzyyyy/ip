@@ -52,7 +52,7 @@ public class DataStorage {
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine().trim();
                     if (!line.isEmpty()) {
-                        taskList = Parser.executeCommand(line, taskList);
+                        Parser.executeCommand(line, taskList);
                     }
                 }
             }
