@@ -83,10 +83,13 @@ public class Parser {
                 String keyword = request.split(" ", 2)[1];
                 response = taskList.findTask(keyword);
             }
+            case "reset" -> {
+                response = taskList.deleteAllTasks();
+            }
             default -> {
-                response = "Come on we've been through this."
+                response = "Come on we've been through this. "
                         + "I only understand these 3 commands: 'todo', 'deadline', 'event'.\n"
-                        + "\tPlease give it in this format {Command taskname}";
+                        + "Please give it in this format {Command taskname}";
             }
             }
         } catch (MissingTaskArgs e) {

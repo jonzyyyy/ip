@@ -1,7 +1,5 @@
 package yapper;
 
-import java.util.Scanner;
-
 import yapper.datastorage.DataStorage;
 import yapper.parser.Parser;
 import yapper.tasktypes.TaskList;
@@ -12,7 +10,6 @@ import yapper.ui.UI;
  * The main class for the Yapper chatbot, which manages task storage, user interactions, and command execution.
  */
 public class Yapper {
-    private static String FILE_PATH = "../data/YapperTasks.txt";
     private TaskList taskList;
     private DataStorage dataStorage;
     private UI ui;
@@ -21,8 +18,8 @@ public class Yapper {
      * Constructs a {@code Yapper} chatbot instance. Initializes data storage, loads existing tasks, and sets up user
      * interaction.
      */
-    public Yapper() {
-        dataStorage = new DataStorage(FILE_PATH);
+    public Yapper(String filePath) {
+        dataStorage = new DataStorage(filePath);
         taskList = dataStorage.loadData();
         taskList.activateToPrint();
         ui = new UI();

@@ -13,7 +13,7 @@ import yapper.Yapper;
  */
 public class Main extends Application {
 
-    private Yapper yapper = new Yapper();
+    private Yapper yapper = new Yapper("../Data/YapperTasks.txt");
 
     @Override
     public void start(Stage stage) {
