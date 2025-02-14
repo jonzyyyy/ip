@@ -15,7 +15,6 @@ public class Yapper {
     private static String FILE_PATH = "../data/YapperTasks.txt";
     private TaskList taskList;
     private DataStorage dataStorage;
-    private String botName = "Yapper";
     private UI ui;
 
     /**
@@ -26,7 +25,7 @@ public class Yapper {
         dataStorage = new DataStorage(FILE_PATH);
         taskList = dataStorage.loadData();
         taskList.activateToPrint();
-        ui = new UI(botName);
+        ui = new UI();
     }
 
     public String getIntroduction() {

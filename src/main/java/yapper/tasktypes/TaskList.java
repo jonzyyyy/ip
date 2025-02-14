@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-    private boolean isToPrint = false;
+    private boolean isPrintEnabled = false;
 
     /**
      * Constructs an empty {@code TaskList}.
@@ -22,14 +22,14 @@ public class TaskList {
      * Activates printing of messages when tasks are added, removed, or modified.
      */
     public void activateToPrint() {
-        this.isToPrint = true;
+        this.isPrintEnabled = true;
     }
 
     /**
      * Deactivates printing of messages when tasks are added, removed, or modified.
      */
     public void deactivateToPrint() {
-        this.isToPrint = false;
+        this.isPrintEnabled = false;
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList {
     public String addTask(Task newTask) {
         String str = "";
         this.tasks.add(newTask);
-        if (this.isToPrint) {
+        if (this.isPrintEnabled) {
             str = ("Got it. I've added this task:\n\t" + newTask
                 + "\nNow you have " + this.tasks.size() + " tasks in the list.");
         }
@@ -63,7 +63,7 @@ public class TaskList {
                 str = "Error: Invalid index. Please enter a number between 1 and " + this.tasks.size();
             }
             Task task = this.tasks.remove(index);
-            if (this.isToPrint) {
+            if (this.isPrintEnabled) {
                 str = "Noted. I've removed this task:\n\t" + task
                     + "Now you have " + this.tasks.size() + " tasks in the list.";
             }
@@ -106,16 +106,16 @@ public class TaskList {
         Task task = tasks.get(index);
         if (completed) {
             task.setCompleted();
-            if (isToPrint) {
+            if (isPrintEnabled) {
                 str = "Nice! I've marked this task as done:";
             }
         } else {
             task.setNotCompleted();
-            if (isToPrint) {
+            if (isPrintEnabled) {
                 str = "OK, I've marked this task as not done yet:";
             }
         }
-        if (isToPrint) {
+        if (isPrintEnabled) {
             str += "\n\t" + task;
         }
         return str;
