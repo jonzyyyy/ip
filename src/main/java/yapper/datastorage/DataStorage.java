@@ -23,6 +23,7 @@ public class DataStorage {
      * @param filePath The path to the file used for storing task data.
      */
     public DataStorage(String filePath) {
+        assert filePath != null && !filePath.trim().isEmpty() : "File path must not be null or empty";
         this.file = new File(filePath);
     }
 
@@ -42,6 +43,11 @@ public class DataStorage {
             }
 
             // Create file if it does not exist
+            assert this.file != null : "File object is not initialized properly";
+            if (!this.file.exists() && !this.file.createNewFile()) {
+                System.out.println("Error: Failed to create file.");
+                return taskList;
+            }
             if (!this.file.exists() && !this.file.createNewFile()) {
                 System.out.println("Error: Failed to create file.");
                 return taskList;
@@ -71,8 +77,11 @@ public class DataStorage {
      * @param taskList The list of tasks to be saved to the file.
      */
     public void saveData(TaskList taskList) {
+        assert this.file != null && this.file.canWrite() : "File must be writable before saving data";
         try (FileWriter fileWriter = new FileWriter(this.file)) {
+            assert taskList != null : "TaskList cannot be null";
             ArrayList<Task> tasks = taskList.getList();
+            assert tasks != null : "TaskList cannot be null";
 
             // Ensure the parent directory exists
             File parentDir = this.file.getParentFile();
