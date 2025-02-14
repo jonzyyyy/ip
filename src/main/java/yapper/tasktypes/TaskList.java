@@ -3,7 +3,6 @@ package yapper.tasktypes;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
 /**
  * Represents a list of tasks that can be manipulated by adding, removing,
  * marking, and unmarking tasks. Supports optional printing of operations.
@@ -41,6 +40,11 @@ public class TaskList {
      */
     public String addTask(Task newTask) {
         String str = "";
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (Objects.equals(this.tasks.get(i).taskName, newTask.taskName)) {
+                return "Sorry, you already have a task with the same name in the list!";
+            }
+        }
         this.tasks.add(newTask);
         if (this.isPrintEnabled) {
             str = ("Got it. I've added this task:\n\t" + newTask
@@ -57,9 +61,8 @@ public class TaskList {
      */
     public String deleteTask(String strIndex) {
         String str = "";
-        int index;
         try {
-            index = Integer.parseInt(strIndex) - 1;
+            int index = Integer.parseInt(strIndex) - 1;
             if (index < 0 || index >= this.tasks.size()) {
                 str = "Error: Invalid index. Please enter a number between 1 and " + this.tasks.size();
             }

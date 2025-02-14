@@ -46,7 +46,7 @@ public abstract class Task {
         return this.request;
     }
 
-    protected boolean getIsCompleted() {
+    public boolean getIsCompleted() {
         return this.isCompleted;
     }
 
