@@ -45,4 +45,12 @@ public abstract class Task {
     public String getUserInput() {
         return this.request;
     }
+
+    protected boolean getIsCompleted() {
+        return this.isCompleted;
+    }
+
+    protected String getTaskName() {
+        return this.taskName;
+    }
 }

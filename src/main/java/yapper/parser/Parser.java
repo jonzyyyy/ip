@@ -90,9 +90,9 @@ public class Parser {
             }
             }
         } catch (MissingTaskArgs e) {
-            return e.getMessage();
+            response = e.getMessage();
         } catch (NumberFormatException e) {
-            return "Please enter a valid index to remove task according to the list.";
+            response = "Please enter a valid index to remove task according to the list.";
         }
         return response;
     }

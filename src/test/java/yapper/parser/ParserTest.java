@@ -1,52 +1,41 @@
 package yapper.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import yapper.tasktypes.TaskList;
+import yapper.exceptions.MissingTaskArgs;
+import yapper.tasktypes.ToDo;
 
-public class ParserTest {
-    private TaskList taskList;
 
-    @BeforeEach
-    void setUp() {
-        taskList = new TaskList();
+class ParserTest {
+
+    @Test
+    void testValidToDoCreation() {
+        ToDo todo = new ToDo("todo Read a book");
+        assertEquals("[T][ ] Read a book", todo.toString(), "String representation should be formatted correctly.");
     }
 
     @Test
-    void testExecuteCommandValidTodo() {
-        String input = "todo Buy milk";
-        taskList = Parser.executeCommand(input, taskList);
-
-        assertEquals(1, taskList.getList().size(), "TaskList should contain 1 task after valid 'todo' command");
-        assertEquals("todo Buy milk", taskList.getList().get(0).getUserInput(), "Task description should match");
+    void testToDoMissingTaskArgs() {
+        Exception exception = assertThrows(MissingTaskArgs.class, () -> new ToDo("todo"),
+                "Should throw MissingTaskArgs exception when no task name is provided.");
+        assertEquals("\tHey! Don't just tell me the type of command, tell me what your task is. And leave a space between words, will ya.",
+                exception.getMessage(), "Error message should match expected output.");
     }
 
     @Test
-    void testExecuteCommandValidDeadline() {
-        String input = "deadline Submit report /by 2024/02/05 0000";
-        taskList = Parser.executeCommand(input, taskList);
-
-        assertEquals(1, taskList.getList().size(), "TaskList should contain 1 task after valid 'deadline' command");
-        assertEquals("deadline Submit report /by 2024/02/05 0000", taskList.getList().get(0).getUserInput(),
-                "Deadline task should match input");
+    void testToDoWhitespaceTaskName() {
+        Exception exception = assertThrows(MissingTaskArgs.class, () -> new ToDo("todo "),
+                "Should throw MissingTaskArgs exception when task name is only whitespace.");
+        assertEquals("\tHey! Don't just tell me the type of command, tell me what your task is. And leave a space between words, will ya.",
+                exception.getMessage(), "Error message should match expected output.");
     }
 
     @Test
-    void testExecuteCommandInvalidCommand() {
-        String input = "randomtext xyz";
-        taskList = Parser.executeCommand(input, taskList);
-
-        assertEquals(0, taskList.getList().size(), "TaskList should remain empty for an invalid command");
-    }
-
-    @Test
-    void testExecuteCommandEmptyInput() {
-        String input = "";
-        taskList = Parser.executeCommand(input, taskList);
-
-        assertEquals(0, taskList.getList().size(), "TaskList should remain empty for an empty command");
+    void testToDoToString() {
+        ToDo todo = new ToDo("todo Finish homework");
+        assertEquals("[T][ ] Finish homework", todo.toString(), "ToString should return formatted ToDo task.");
     }
 }
