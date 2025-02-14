@@ -6,22 +6,18 @@ package yapper.ui;
  */
 public class UI {
     private static final int HORIZONTAL_LINE_LENGTH = 80;
-    private final String name;
+    private static final String NAME = "Yapper";
 
     /**
      * Constructs a {@code UI} instance with the chatbot's name.
-     *
-     * @param name The name of the chatbot.
      */
-    public UI(String name) {
-        this.name = name;
-    }
+    public UI() {}
 
     /**
      * Prints the chatbot's introduction message.
      */
     public String getIntroduction() {
-        return "Hello! I'm " + name + ". What can I do for you?";
+        return "Hello! I'm " + NAME + ". What can I do for you?";
     }
 
     /**

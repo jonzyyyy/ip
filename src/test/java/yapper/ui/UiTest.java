@@ -11,7 +11,7 @@ class UiTest {
     @BeforeEach
     void setUp() {
         // Create the UI object with a placeholder name
-        ui = new UI("Yapper");
+        ui = new UI();
     }
 
     @Test
