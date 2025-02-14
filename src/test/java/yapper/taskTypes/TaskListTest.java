@@ -36,8 +36,8 @@ class TaskListTest {
         taskList.addTask(task);
         String response = taskList.deleteTask("1");
         assertEquals(0, taskList.getList().size(), "TaskList should be empty after deletion.");
-        assertEquals("Noted. I've removed this task:\n\t[T][ ] Read a book\nNow you have 0 tasks in the list.", response,
-                "Delete confirmation message should match.");
+        assertEquals("Noted. I've removed this task:\n\t[T][ ] Read a book\nNow you have 0 tasks in the list.",
+                response, "Delete confirmation message should match.");
     }
 
     @Test
@@ -100,5 +100,17 @@ class TaskListTest {
         taskList.addTask(new ToDo("todo Write notes"));
         String expected = "\tHere are the tasks in your list:\n\t1.[T][ ] Read a book\n\t2.[T][ ] Write notes";
         assertEquals(expected, taskList.toString(), "TaskList should return the correctly formatted string.");
+    }
+
+
+    @Test
+    void testAddDuplicateTask() {
+        Task task1 = new ToDo("todo Read a book");
+        Task task2 = new ToDo("todo Read a book"); // Duplicate task
+        taskList.addTask(task1);
+        taskList.addTask(task2);
+
+        assertEquals(1, taskList.getList().size(), "TaskList should allow duplicate tasks.");
+        assertEquals("[T][ ] Read a book", taskList.getList().get(0).toString(), "First task should match.");
     }
 }
