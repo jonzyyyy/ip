@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,13 +8,21 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import yapper.Yapper;
 
-
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
+    private Yapper yapper;
 
-    private Yapper yapper = new Yapper("../Data/YapperTasks.txt");
+    /**
+     * Constructs a Main instance and initializes the Yapper instance.
+     * The Yapper instance is created with a file path pointing to "data/YapperTasks.txt",
+     * ensuring that task data is stored persistently in the project's data directory.
+     */
+    public Main() {
+        String filePath = Paths.get(System.getProperty("user.dir"), "data", "YapperTasks.txt").toString();
+        yapper = new Yapper(filePath);
+    }
 
     @Override
     public void start(Stage stage) {

@@ -7,7 +7,6 @@ Yapper provides a simple yet powerful way to track your items efficiently.
 
 ## Adding tasks
 
-// Describe the action and its outcome.
 Yapper provides functionality for 3 types of tasks:
 1. `todo`: This command adds a basic task to your list.  
     * Format: `todo {taskname}`
