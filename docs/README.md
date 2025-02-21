@@ -1,19 +1,10 @@
 # Yapper User Guide
 
-<<<<<<< Updated upstream
 ![img.png](Ui.png)
 
 Yapper is a lightweight and intuitive list-tracking application designed to help users stay organised. Whether you need to manage tasks, events, or deadlines, 
 Yapper provides a simple yet powerful way to track your items efficiently.
 
-=======
-
-![img.png](Ui.png)
-
-Yapper is a lightweight and intuitive list-tracking application designed to help users stay organised. Whether you need to manage tasks, events, or deadlines, 
-Yapper provides a simple yet powerful way to track your items efficiently.
-
->>>>>>> Stashed changes
 ## Adding tasks
 
 // Describe the action and its outcome.
