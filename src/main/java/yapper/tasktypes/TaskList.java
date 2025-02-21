@@ -65,7 +65,7 @@ public class TaskList {
             Task task = this.tasks.remove(index);
             if (this.isToPrint) {
                 str = "Noted. I've removed this task:\n\t" + task
-                    + "Now you have " + this.tasks.size() + " tasks in the list.";
+                    + "\nNow you have " + this.tasks.size() + " tasks in the list.";
             }
         } catch (NumberFormatException e) {
             return "Please enter a valid index to remove task according to the list.";
