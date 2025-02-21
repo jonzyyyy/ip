@@ -3,7 +3,9 @@ package yapper.tasktypes;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
+import yapper.exceptions.InvalidTaskType;
 import yapper.exceptions.MissingTaskArgs;
 
 /**
@@ -26,18 +28,27 @@ public class Event extends Task {
     public Event(String request) {
         this.request = request;
         String[] splitString = request.split("event | /from | /to ");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
         if (splitString.length < 4) {
             throw new MissingTaskArgs("\tHey! I don't quite understand you. Remember for Events "
                     + "Give it in this format: command name /from {YYYY/MM/DD} {0000} /to {YYYY/MM/DD} {2359}");
         }
-
         this.taskName = splitString[1].trim();
-        this.fromDate = LocalDate.parse(splitString[2].trim(), formatter);
-        this.fromTime = LocalTime.parse(splitString[2].trim(), formatter);
-        this.toDate = LocalDate.parse(splitString[3].trim(), formatter);
-        this.toTime = LocalTime.parse(splitString[3].trim(), formatter);
+        try {
+            // Split date and time separately
+            String[] fromDateTime = splitString[2].trim().split(" ");
+            String[] toDateTime = splitString[3].trim().split(" ");
+            this.fromDate = LocalDate.parse(fromDateTime[0], dateFormatter);
+            this.fromTime = LocalTime.parse(fromDateTime[1], timeFormatter);
+            this.toDate = LocalDate.parse(toDateTime[0], dateFormatter);
+            this.toTime = LocalTime.parse(toDateTime[1], timeFormatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidTaskType("\tHey! I don't quite understand you. "
+                    + "Give it in this format: command name /from {YYYY/MM/DD} {0000} "
+                    + "/to {YYYY/MM/DD} {2359}");
+        }
     }
 
     /**

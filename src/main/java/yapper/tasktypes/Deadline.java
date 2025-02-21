@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import yapper.exceptions.InvalidTaskType;
 import yapper.exceptions.MissingTaskArgs;
 
 /**
@@ -51,7 +52,7 @@ public class Deadline extends Task {
             this.date = LocalDate.parse(dateTimeParts[0].trim(), dateFormatter);
             this.time = LocalTime.parse(dateTimeParts[1].trim(), timeFormatter);
         } catch (DateTimeParseException e) {
-            throw new MissingTaskArgs("\tHey! I don't quite understand you. "
+            throw new InvalidTaskType("\tHey! I don't quite understand you. "
                     + "Remember for Deadline Give it in this format: "
                     + "command name /by YYYY/MM/DD HHmm");
         }
