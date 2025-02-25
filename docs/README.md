@@ -15,7 +15,8 @@ Yapper provides functionality for 3 types of tasks:
 3. `event`: This command adds a task with a start and end time.
     * Format: `event (event name) /from YYYY/MM/DD HHMM /to YYYY/MM/DD HHMM`
     * Note: HHMM is in 24-hr format (e.g. 1559)
-    * 
+
+
 
 Example: `event Annual Meeting /from 2025/02/01 1500 /to 2025/02/01 1700`
 
